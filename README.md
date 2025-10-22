@@ -1,5 +1,5 @@
-# chargebackshield.io
-ChargebackShield.io | Generate professional chargeback evidence packs in 60 seconds
+# chargebackgenerator.io
+Chargebackgenerator.io | Generate professional chargeback evidence packs in 60 seconds
 
 # Chargeback Evidence Pack Generator MVP
 
@@ -45,7 +45,7 @@ A simple, standalone web application that generates professional chargeback evid
    - Company name in the header
    - Pricing information
    - Feature descriptions
-   - Contact information in footer
+   - Contact information in the footer
 
 #### Modifying Form Fields:
 1. Open `index.html` in any text editor
