@@ -465,32 +465,43 @@ This transaction was legitimate and fulfilled according to our terms of service.
 
     // Contact form handler
     const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('contactName').value;
-            const email = document.getElementById('contactEmail').value;
-            const message = document.getElementById('contactMessage').value;
-            
-            // For MVP: Just show confirmation
-            alert(
-                'Thank you for your message!\n\n' +
-                'We have received your inquiry and will respond within 24 hours.\n\n' +
-                '(In production, this would be sent to your support email)'
-            );
-            
-            // Close modal
-            const modal = bootstrap.Modal.getInstance(document.getElementById('contactModal'));
-            if (modal) {
-                modal.hide();
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(contactForm);
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        // Show loading
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+        submitBtn.disabled = true;
+        
+        // Send to Formspree
+        fetch(contactForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
             }
-            
-            // Reset form
-            contactForm.reset();
+        }).then(response => {
+            if (response.ok) {
+                alert('✅ Message sent successfully!\n\nThank you for contacting us. We\'ll respond within 24 hours.');
+                contactForm.reset();
+                
+                const modal = bootstrap.Modal.getInstance(document.getElementById('contactModal'));
+                if (modal) modal.hide();
+            } else {
+                throw new Error('Failed');
+            }
+        }).catch(error => {
+            alert('Sorry, there was an error. Please email us directly at: support@chargebackgenerator.com');
+        }).finally(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
         });
-    }
-});
+    });
+}
 
 // Utility function to format currency
 function formatCurrency(amount) {
