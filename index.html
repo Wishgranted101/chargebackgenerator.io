@@ -3,289 +3,442 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chargeback Evidence Pack Generator - DocsKit</title>
-    <meta name="description" content="Generate professional chargeback evidence packs in 60 seconds. No integrations, no complexity - just paste your order details and get a dispute-ready PDF.">
+    <title>Chargeback Evidence Pack Generator</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="https://via.placeholder.com/30" alt="DocsKit Logo" class="me-2">DocsKit
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="fas fa-shield-alt me-2"></i>
+                Chargeback Generator
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" aria-current="page" href="#" id="navbarDropdownTools" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Tools
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownTools">
-                            <li><a class="dropdown-item" href="chargeback_generator.html">Chargeback Evidence Pack Generator</a></li>
-                            <li><a class="dropdown-item" href="bank_transaction_categorizer.html">Bank Transaction Categorizer (Coming Soon)</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Explore All Tools</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#faq">FAQ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary ms-lg-3" href="#">Log In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-primary ms-lg-2" href="#">Sign Up</a>
-                    </li>
-                </ul>
-            </div>
         </div>
     </nav>
 
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Chargeback Evidence Pack Generator</h1>
-        <p class="lead text-center mb-5">Win More Chargebacks. Effortlessly. Generate professional, dispute-ready evidence packs in under a minute. Simply paste your order details – no integrations, no complexity, just powerful results.</p>
-
-        <div class="alert alert-info text-center" role="alert">
-            <strong>Important Notice:</strong> This is a formatting tool. We do not validate or calculate totals. Please ensure all information you enter is accurate.
+    <!-- Hero Section -->
+    <section class="hero-section bg-light py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold text-primary mb-4">
+                        Stop Losing Chargebacks
+                    </h1>
+                    <p class="lead mb-4">
+                        Generate professional chargeback evidence packs in 60 seconds. 
+                        No integrations, no complexity - just paste your order details and get a dispute-ready PDF.
+                    </p>
+                    <div class="d-flex gap-3 mb-4">
+                        <div class="feature-badge">
+                            <i class="fas fa-clock text-success"></i>
+                            <span>60 Second Generation</span>
+                        </div>
+                        <div class="feature-badge">
+                            <i class="fas fa-universal-access text-success"></i>
+                            <span>All Platforms</span>
+                        </div>
+                        <div class="feature-badge">
+                            <i class="fas fa-file-pdf text-success"></i>
+                            <span>Professional PDF</span>
+                        </div>
+                    </div>
+                    <a href="#generator" class="btn btn-primary btn-lg">
+                        <i class="fas fa-rocket me-2"></i>
+                        Try It Now - Free Sample
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="demo-video-placeholder">
+                        <div class="video-container">
+                            <i class="fas fa-play-circle"></i>
+                            <p>Watch 45-Second Demo</p>
+                            <small>See how easy it is to generate evidence packs</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="progress-container mb-4">
-            <div class="progress-step active" id="step1">
-                <div class="circle">1</div>
-                <p>Build Evidence</p>
-            </div>
-            <div class="progress-line"></div>
-            <div class="progress-step" id="step2">
-                <div class="circle">2</div>
-                <p>Review & Pay</p>
-            </div>
-            <div class="progress-line"></div>
-            <div class="progress-step" id="step3">
-                <div class="circle">3</div>
-                <p>Download</p>
+    <!-- Generator Section -->
+    <section id="generator" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card shadow-lg">
+                        <div class="card-header bg-primary text-white text-center">
+                            <h3 class="mb-0">
+                                <i class="fas fa-magic me-2"></i>
+                                Generate Your Evidence Pack
+                            </h3>
+                            <p class="mb-0 mt-2">Fill in the details below and get your professional PDF instantly</p>
+                        </div>
+                        <div class="card-body p-4">
+                            <form id="evidenceForm">
+                                <div class="progress-container mb-4">
+                                    <div class="progress-step active" id="step1">1. Build Evidence</div>
+                                    <div class="progress-step" id="step2">2. Review & Pay</div>
+                                    <div class="progress-step" id="step3">3. Download</div>
+                                    <div class="progress-bar-fill" id="progressBarFill"></div>
+                                </div>
+
+                                <div class="alert alert-warning text-center mb-4" role="alert">
+                                    <strong>Important Notice:</strong> This is a formatting tool. We do not validate or calculate totals. Please ensure all information you pasted or uploaded is accurate.
+                                </div>
+
+                                <!-- Order Information -->
+                                <div class="section-header">
+                                    <h5><i class="fas fa-shopping-cart me-2"></i>Order Information</h5>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="orderId" class="form-label">Order ID *</label>
+                                        <input type="text" class="form-control" id="orderId" placeholder="e.g., #12345" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="orderDate" class="form-label">Order Date *</label>
+                                        <input type="date" class="form-control" id="orderDate" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="orderAmount" class="form-label">Order Amount *</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control" id="orderAmount" placeholder="99.99" step="0.01" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="platform" class="form-label">Platform *</label>
+                                        <select class="form-select" id="platform" required>
+                                            <option value="">Select Platform</option>
+                                            <option value="shopify">Shopify</option>
+                                            <option value="woocommerce">WooCommerce</option>
+                                            <option value="BigCommerce">BigCommerce</option>
+                                            <option value="Big Cartel">Big Cartel</option>
+                                            <option value="Wix">Wix</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Merchant & Customer Information -->
+                                <div class="section-header">
+                                    <h5><i class="fas fa-user-tie me-2"></i>Merchant & Customer Information</h5>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="businessName" class="form-label">Business Name *</label>
+                                        <input type="text" class="form-control" id="businessName" placeholder="Your Business LLC" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="customerName" class="form-label">Customer Name *</label>
+                                        <input type="text" class="form-control" id="customerName" placeholder="John Doe" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="businessContact" class="form-label">Business Contact (Email/Phone) *</label>
+                                        <input type="text" class="form-control" id="businessContact" placeholder="your@email.com" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="customerEmail" class="form-label">Customer Email *</label>
+                                        <input type="email" class="form-control" id="customerEmail" placeholder="customer@email.com" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="billingShippingAddress" class="form-label">Billing/Shipping Address *</label>
+                                    <textarea class="form-control" id="billingShippingAddress" rows="3" placeholder="123 Main St, City, State, ZIP" required></textarea>
+                                </div>
+
+                                <!-- Order Details -->
+                                <div class="section-header">
+                                    <h5><i class="fas fa-receipt me-2"></i>Order Details</h5>
+                                </div>
+
+                                <div class="alert alert-warning text-center mb-4" role="alert">
+                                    <strong>Important Notice:</strong> This is a formatting tool. We do not validate or calculate totals. Please ensure all information you paste is accurate.
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="orderSummary" class="form-label">Paste order summary from your platform *</label>
+                                    <textarea class="form-control" id="orderSummary" rows="5" placeholder="Example:
+iPhone 13 - Qty: 1 - $699.00
+Protective Case - Qty: 1 - $29.99
+Shipping - $15.00
+Total: $743.99" required></textarea>
+                                </div>
+
+                                <!-- Shipping & Delivery Proof -->
+                                <div class="section-header">
+                                    <h5><i class="fas fa-shipping-fast me-2"></i>Shipping & Delivery Proof</h5>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="shippingAddress" class="form-label">Shipping Address *</label>
+                                    <textarea class="form-control" id="shippingAddress" rows="3" placeholder="123 Main St, City, State, ZIP" required></textarea>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="trackingNumber" class="form-label">Tracking Number</label>
+                                        <input type="text" class="form-control" id="trackingNumber" placeholder="e.g., 1Z9999999999999999">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="deliveryDate" class="form-label">Delivered on:</label>
+                                        <input type="date" class="form-control" id="deliveryDate">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="proofOfDeliveryPhoto" class="form-label">Proof of Delivery Photo (Optional)</label>
+                                    <input type="file" class="form-control" id="proofOfDeliveryPhoto" accept="image/*">
+                                </div>
+
+                                <!-- Additional Evidence -->
+
+                                <div class="mb-3">
+                                    <label for="customerCommunication" class="form-label">Communication History</label>
+                                    <div class="input-group">
+                                        <textarea class="form-control" id="customerCommunication" rows="4" placeholder="Paste relevant emails or chat logs here, then click Summarize."></textarea>
+                                        <button class="btn btn-outline-primary" type="button" id="summarizeBtn"><i class="fas fa-magic me-1"></i> Summarize with AI</button>
+                                    </div>
+                                </div>
+
+                                <!-- Rebuttal & Supporting Evidence -->
+                                <div class="section-header">
+                                    <h5><i class="fas fa-gavel me-2"></i>Rebuttal & Supporting Evidence</h5>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="refundPolicy" class="form-label">Your Refund/Terms of Service Policy</label>
+                                    <textarea class="form-control" id="refundPolicy" rows="3" placeholder="Paste the relevant section of your policies that applies to this dispute."></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="rebuttalMemo" class="form-label">Rebuttal Memo</label>
+                                    <textarea class="form-control" id="rebuttalMemo" rows="5" placeholder="Click the button below to draft a rebuttal based on the information you've provided."></textarea>
+                                    <button class="btn btn-primary mt-2" type="button" id="draftRebuttalBtn"><i class="fas fa-magic me-1"></i> Draft Rebuttal Memo with AI</button>
+                                </div>
+
+                                <!-- Generate Button -->
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn btn-success btn-lg px-5">
+                                        <i class="fas fa-magic me-2"></i>
+                                        Generate Evidence Pack - $49
+                                    </button>
+                                    <p class="text-muted mt-2 mb-0">
+                                        <small><i class="fas fa-lock me-1"></i>Your data is processed securely and not stored</small>
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <form id="evidenceForm" class="needs-validation" novalidate>
-            <section class="card mb-4 shadow-sm">
-                <div class="card-header bg-primary text-white">Merchant Information</div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label for="merchantName" class="form-label">Your Business Name</label>
-                        <input type="text" class="form-control" id="merchantName" required>
-                        <div class="invalid-feedback">Please enter your business name.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="merchantWebsite" class="form-label">Your Website URL</label>
-                        <input type="url" class="form-control" id="merchantWebsite" placeholder="e.g., https://www.yourstore.com" required>
-                        <div class="invalid-feedback">Please enter a valid website URL.</div>
-                    </div>
+    <!-- Features Section -->
+    <section class="features-section bg-light py-5">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="fw-bold">Why Choose Our Evidence Generator?</h2>
+                    <p class="lead text-muted">Save time, reduce errors, win more disputes</p>
                 </div>
-            </section>
-
-            <section class="card mb-4 shadow-sm">
-                <div class="card-header bg-primary text-white">Order Details</div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label for="orderId" class="form-label">Order ID</label>
-                        <input type="text" class="form-control" id="orderId" required>
-                        <div class="invalid-feedback">Please enter the Order ID.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="orderDate" class="form-label">Order Date</label>
-                        <input type="date" class="form-control" id="orderDate" required>
-                        <div class="invalid-feedback">Please enter the Order Date.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="orderAmount" class="form-label">Order Amount ($)</label>
-                        <input type="number" class="form-control" id="orderAmount" step="0.01" required>
-                        <div class="invalid-feedback">Please enter the Order Amount.</div>
-                        <small class="form-text text-muted">Please double-check the amount for accuracy.</small>
-                    </div>
-                    <div class="mb-3">
-                        <label for="paymentPlatform" class="form-label">Payment Platform</label>
-                        <select class="form-select" id="paymentPlatform" required>
-                            <option value="">Select...</option>
-                            <option value="Stripe">Stripe</option>
-                            <option value="PayPal">PayPal</option>
-                            <option value="Shopify Payments">Shopify Payments</option>
-                            <option value="Square">Square</option>
-                            <option value="Other">Other</option>
-                        </select>
-                        <div class="invalid-feedback">Please select a Payment Platform.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="ecommercePlatform" class="form-label">E-commerce Platform</label>
-                        <select class="form-select" id="ecommercePlatform" required>
-                            <option value="">Select...</option>
-                            <option value="Shopify">Shopify</option>
-                            <option value="eBay">eBay</option>
-                            <option value="Amazon">Amazon</option>
-                            <option value="Etsy">Etsy</option>
-                            <option value="WooCommerce">WooCommerce</option>
-                            <option value="Other">Other</option>
-                        </select>
-                        <div class="invalid-feedback">Please select an E-commerce Platform.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="productDescription" class="form-label">Product/Service Description</label>
-                        <textarea class="form-control" id="productDescription" rows="3" required></textarea>
-                        <div class="invalid-feedback">Please enter a Product/Service Description.</div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="card mb-4 shadow-sm">
-                <div class="card-header bg-primary text-white">Customer & Dispute Details</div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label for="customerName" class="form-label">Customer Name</label>
-                        <input type="text" class="form-control" id="customerName" required>
-                        <div class="invalid-feedback">Please enter the customer's name.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="customerEmail" class="form-label">Customer Email</label>
-                        <input type="email" class="form-control" id="customerEmail" required>
-                        <div class="invalid-feedback">Please enter the customer's email.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="disputeReason" class="form-label">Dispute Reason (as stated by customer/bank)</label>
-                        <textarea class="form-control" id="disputeReason" rows="3" required></textarea>
-                        <div class="invalid-feedback">Please enter the dispute reason.</div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="card mb-4 shadow-sm">
-                <div class="card-header bg-primary text-white">Shipping & Delivery Proof</div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label for="trackingNumber" class="form-label">Tracking Number</label>
-                        <input type="text" class="form-control" id="trackingNumber">
-                    </div>
-                    <div class="mb-3">
-                        <label for="deliveryDate" class="form-label">Delivery Date</label>
-                        <input type="date" class="form-control" id="deliveryDate">
-                    </div>
-                    <div class="mb-3">
-                        <label for="proofOfDeliveryPhoto" class="form-label">Proof of Delivery Photo (Optional)</label>
-                        <input type="file" class="form-control" id="proofOfDeliveryPhoto" accept="image/*">
-                        <small class="form-text text-muted">Upload an image showing proof of delivery (e.g., delivery confirmation, photo of package at door).</small>
-                    </div>
-                </div>
-            </section>
-
-            <section class="card mb-4 shadow-sm">
-                <div class="card-header bg-primary text-white">Communication History</div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label for="communicationHistory" class="form-label">Relevant Communication History (e.g., emails, chat logs)</label>
-                        <textarea class="form-control" id="communicationHistory" rows="5"></textarea>
-                        <small class="form-text text-muted">Include any relevant conversations with the customer regarding the order or dispute.</small>
-                    </div>
-                    <button type="button" class="btn btn-outline-primary btn-sm" id="summarizeCommunicationBtn"><i class="fas fa-magic"></i> Summarize with AI (Simulated)</button>
-                </div>
-            </section>
-
-            <section class="card mb-4 shadow-sm">
-                <div class="card-header bg-primary text-white">Refund Policy & Terms of Service</div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label for="refundPolicy" class="form-label">Your Refund Policy (as applicable to this order)</label>
-                        <textarea class="form-control" id="refundPolicy" rows="3"></textarea>
-                        <small class="form-text text-muted">State your refund policy that the customer agreed to at the time of purchase.</small>
-                    </div>
-                    <div class="mb-3">
-                        <label for="termsOfService" class="form-label">Your Terms of Service (as applicable to this order)</label>
-                        <textarea class="form-control" id="termsOfService" rows="3"></textarea>
-                        <small class="form-text text-muted">State your terms of service that the customer agreed to at the time of purchase.</small>
-                    </div>
-                </div>
-            </section>
-
-            <section class="card mb-4 shadow-sm">
-                <div class="card-header bg-primary text-white">Additional Evidence</div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label for="additionalEvidence" class="form-label">Any Other Relevant Information or Evidence</label>
-                        <textarea class="form-control" id="additionalEvidence" rows="5"></textarea>
-                        <small class="form-text text-muted">e.g., screenshots, IP addresses, previous successful orders from this customer.</small>
-                    </div>
-                </div>
-            </section>
-
-            <section class="card mb-4 shadow-sm">
-                <div class="card-header bg-primary text-white">Draft Rebuttal Memo with AI (Optional)</div>
-                <div class="card-body">
-                    <p>This is our most powerful feature. It transforms the product from a simple "formatter" into an indispensable "dispute assistant."</p>
-                    <p>After you've entered your evidence, a single click tells our AI to write a professional, persuasive rebuttal memo. It analyzes all the facts of your case and crafts a formal argument to send to the bank, explaining why the chargeback should be reversed.</p>
-                    <p>It automates the hardest part of fighting a chargeback—writing the actual argument. This saves you time, reduces stress, and ensures your case is presented clearly and professionally, increasing your chances of winning.</p>
-                    <button type="button" class="btn btn-info" id="draftRebuttalBtn"><i class="fas fa-robot"></i> Draft Rebuttal Memo with AI (Simulated)</button>
-                    <div class="mt-3" id="rebuttalOutput" style="display: none;">
-                        <h6>AI-Drafted Rebuttal:</h6>
-                        <textarea class="form-control" id="aiRebuttalText" rows="10" readonly></textarea>
-                        <small class="form-text text-muted">You can copy and paste this text into your final PDF or edit it as needed.</small>
-                    </div>
-                </div>
-            </section>
-
-            <div class="d-grid gap-2 mb-5">
-                <button type="submit" class="btn btn-success btn-lg" id="generatePackBtn">Generate Evidence Pack - $49</button>
             </div>
-        </form>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h5>60-Second Generation</h5>
+                        <p>What used to take 30-60 minutes now takes less than a minute. Just fill the form and download your PDF.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-universal-access"></i>
+                        </div>
+                        <h5>Works with Any Platform</h5>
+                        <p>Shopify, Big Cartel, BigCommerce, WooCommerce - our tool works with any e-commerce platform.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h5>Higher Win Rates</h5>
+                        <p>Professional formatting and complete evidence compilation increase your chances of winning disputes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ & Policies Section -->
+    <section class="faq-section py-5">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="fw-bold">Frequently Asked Questions & Policies</h2>
+                    <p class="lead text-muted">Everything you need to know about our service</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    When would we issue a refund?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We issue refunds only in cases where our tool fails to generate a PDF evidence pack after a successful payment. This means if you pay for a pack and do not receive a downloadable PDF, you are eligible for a full refund. Refund requests must be made within 7 days of the failed generation attempt.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Why would we NOT issue a refund?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We do not issue refunds for:
+                                    <ul>
+                                        <li>Chargeback disputes are lost after using our tool. Our tool is for formatting and organizing evidence; it does not guarantee a win.</li>
+                                        <li>Incorrect information entered by the user. Please ensure all data is accurate before generating the pack.</li>
+                                        <li>User error in downloading or saving the generated PDF.</li>
+                                        <li>Change of mind after a successful generation.</li>
+                                        <li>Any issues arising from the content or validity of the evidence provided by the user.</li>
+                                    </ul>
+                                    By using our service, you agree that you understand our tool is a formatting aid and not a guarantee of dispute success.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Terms of Service & Privacy Policy
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Our Terms of Service and Privacy Policy are designed to be simple and transparent. We are a document formatting tool. We do not store any user credentials or sensitive data on our servers. All processing happens client-side or through secure, temporary connections for PDF generation. We do not guarantee the outcome of any chargeback dispute. By using our service, you agree to these terms. For full details, please refer to the links in the footer.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    What is the "Draft Rebuttal Memo with AI" feature?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    This is our most powerful feature. It transforms the product from a simple "formatter" into an indispensable "dispute assistant."
+                                    <ul>
+                                        <li><strong>What it does:</strong> After you've entered your evidence, a single click tells our AI to write a professional, persuasive rebuttal memo. It analyzes all the facts of your case and crafts a formal argument to send to the bank, explaining why the chargeback should be reversed.</li>
+                                        <li><strong>How it helps you:</strong> It automates the hardest part of fighting a chargeback—writing the actual argument. This saves you time, reduces stress, and ensures your case is presented clearly and professionally, increasing your chances of winning.</li>
+                                        <li><strong>Is it optional?</strong> Yes. This is an optional tool to give you a strong starting point. You can use the AI-drafted text as-is or edit it to add your personal touch before generating the final PDF.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <p class="lead text-muted">Still have questions? <a href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Contact Us</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalLabel">Contact Support</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="contactForm">
+                        <div class="alert alert-info text-center mb-3" role="alert">
+                            Please allow up to 24 hours for a response.
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactName" class="form-label">Your Name</label>
+                            <input type="text" class="form-control" id="contactName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactEmail" class="form-label">Your Email</label>
+                            <input type="email" class="form-control" id="contactEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactMessage" class="form-label">Message</label>
+                            <textarea class="form-control" id="contactMessage" rows="5" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactAttachment" class="form-label">Attach File (e.g., faulty PDF)</label>
+                            <input type="file" class="form-control" id="contactAttachment" accept=".pdf,.png,.jpg,.jpeg">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Footer -->
     <footer class="bg-dark text-white py-4">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <h5 class="mb-3"><img src="https://via.placeholder.com/20" alt="DocsKit Logo" class="me-2">DocsKit</h5>
-                    <p>DocsKit: Automate Your Business. Simplify Your Life.</p>
-                    <p class="text-muted">Effortless solutions for tedious tasks.</p>
+                <div class="col-md-6">
+                    <h5>Chargeback Generator</h5>
+                    <p class="mb-0">Helping e-commerce businesses win more disputes, one evidence pack at a time.</p>
                 </div>
-                <div class="col-md-2">
-                    <h5 class="mb-3">Products</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="chargeback_generator.html" class="text-white text-decoration-none">Evidence Pack Generator</a></li>
-                        <li><a href="bank_transaction_categorizer.html" class="text-white text-decoration-none">Bank Transaction Categorizer</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">AI Summary Tools</a></li>
-                    </ul>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">&copy; 2025 Chargeback Generator. All rights reserved.</p>
+                    <p class="mb-0"><small>This is a document formatting tool. We offer no guarantee of chargeback success. No refund if information details were added incorrectly.</small></p>
                 </div>
-                <div class="col-md-2">
-                    <h5 class="mb-3">Support</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#faq" class="text-white text-decoration-none">FAQ</a></li>
-                        <li><a href="contact.html" class="text-white text-decoration-none">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2">
-                    <h5 class="mb-3">Legal</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none">Privacy Policy</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
-            <hr class="my-3 border-secondary">
-            <div class="text-center text-muted">
-                <p>&copy; 2025 DocsKit. All rights reserved. DocsKit is a document automation platform. We offer no guarantee of specific outcomes or results from using our tools. No refund if information details were added incorrectly or for user-side issues.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Loading Modal -->
+    <div class="modal fade" id="loadingModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-5">
+                    <div class="spinner-border text-primary mb-3" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <h5>Generating Your Evidence Pack...</h5>
+                    <p class="text-muted mb-0">This will take just a moment</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
-
