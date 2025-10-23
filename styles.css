@@ -288,3 +288,32 @@ html {
 ::-webkit-scrollbar-thumb:hover {
     background: #0056b3;
 }
+
+/* Line 1 */
+/* Custom Styles for Chargeback Evidence Generator MVP */
+
+:root {
+    --primary-color: #0d6efd;
+    /* ... more variables ... */
+}
+
+/* ... all your existing styles ... */
+
+/* Around Line 195-200 */
+::-webkit-scrollbar-thumb:hover {
+    background: #0056b3;
+}
+
+/* ← ADD 2 BLANK LINES HERE ← */
+
+/* ==================== PROGRESS BAR STYLING ==================== */
+/* Add this section to your existing styles.css file */
+
+.progress-container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    /* ... rest of progress bar CSS ... */
+}
+
+/* ... rest of the progress bar styles ... */
