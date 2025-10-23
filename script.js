@@ -48,7 +48,7 @@ form.addEventListener('submit', function(e) {
             'To generate more packs:\n' +
             '• Purchase full access for $49\n' +
             '• Or contact us for bulk pricing\n\n' +
-            'Email: support@yourwebsite.com'
+            'Email: wichlyc@gmail.com'
         );
         return;
     }
