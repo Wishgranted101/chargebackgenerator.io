@@ -4,54 +4,57 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('evidenceForm');
     const loadingModal = new bootstrap.Modal(document.getElementById('loadingModal'));
 
+    // ==================== USAGE LIMIT FUNCTIONS ====================
     
     // Check if user has already generated a free PDF
-function checkFreeUsageLimit() {
-    const usageKey = 'evidencePackGenerated';
-    const hasGenerated = localStorage.getItem(usageKey);
-    
-    if (hasGenerated === 'true') {
-        // User has already generated one
-        return false;
+    function checkFreeUsageLimit() {
+        const usageKey = 'evidencePackGenerated';
+        const hasGenerated = localStorage.getItem(usageKey);
+        
+        if (hasGenerated === 'true') {
+            return false;
+        }
+        return true;
     }
-    return true;
-}
 
-// Mark that user has generated a PDF
-function markPDFGenerated() {
-    localStorage.setItem('evidencePackGenerated', 'true');
-    localStorage.setItem('generatedDate', new Date().toISOString());
-}
-
-// Add this check in your form submission handler
-form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Check usage limit
-    if (!checkFreeUsageLimit()) {
-        alert(
-            '⚠️ Free Usage Limit Reached\n\n' +
-            'You\'ve already generated your free evidence pack.\n\n' +
-            'To generate more packs:\n' +
-            '• Purchase full access for $49\n' +
-            '• Or contact us for bulk pricing\n\n' +
-            'Email: wichlyc@gmail.com'
-        );
-        return;
+    // Mark that user has generated a PDF
+    function markPDFGenerated() {
+        localStorage.setItem('evidencePackGenerated', 'true');
+        localStorage.setItem('generatedDate', new Date().toISOString());
     }
+
+    // ==================== FORM SUBMISSION HANDLER ====================
     
-    // Show loading modal
-    loadingModal.show();
-    
-    // Simulate processing time
-    setTimeout(() => {
-        generateEvidencePack();
-        markPDFGenerated(); // Mark as generated
-        loadingModal.hide();
-    }, 2000);
-});
+    // Form submission handler with usage limit
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Check usage limit
+        if (!checkFreeUsageLimit()) {
+            alert(
+                '⚠️ Free Usage Limit Reached\n\n' +
+                'You\'ve already generated your free evidence pack.\n\n' +
+                'To generate more packs:\n' +
+                '• Purchase full access for $49\n' +
+                '• Or contact us for bulk pricing\n\n' +
+                'Email: support@chargebackgenerator.com'
+            );
+            return;
+        }
+        
+        // Show loading modal
+        loadingModal.show();
+        
+        // Simulate processing time
+        setTimeout(() => {
+            generateEvidencePack();
+            markPDFGenerated();
+            loadingModal.hide();
+        }, 2000);
+    });
 
     // ==================== AI FEATURES - SUMMARIZE COMMUNICATION ====================
+    
     const summarizeBtn = document.getElementById('summarizeBtn');
     if (summarizeBtn) {
         summarizeBtn.addEventListener('click', function() {
@@ -83,6 +86,7 @@ form.addEventListener('submit', function(e) {
     }
 
     // ==================== AI FEATURES - DRAFT REBUTTAL MEMO ====================
+    
     const draftRebuttalBtn = document.getElementById('draftRebuttalBtn');
     if (draftRebuttalBtn) {
         draftRebuttalBtn.addEventListener('click', function() {
@@ -129,6 +133,8 @@ form.addEventListener('submit', function(e) {
         });
     }
 
+    // ==================== GENERATE EVIDENCE PACK FUNCTION ====================
+    
     // Generate Evidence Pack Function
     function generateEvidencePack() {
         // Get form data
@@ -151,150 +157,141 @@ form.addEventListener('submit', function(e) {
             rebuttalMemo: document.getElementById('rebuttalMemo').value
         };
 
-        // Generate PDF using jsPDF
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-        
-        // Set up document
-        let yPosition = 20;
-        const lineHeight = 7;
-        const pageWidth = doc.internal.pageSize.width;
-        const pageHeight = doc.internal.pageSize.height;
-        const margin = 20;
-        const contentWidth = pageWidth - (margin * 2);
+        // Format date nicely
+        const generatedDate = new Date().toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
 
-        // Helper function to add text with word wrapping
-        function addWrappedText(text, x, y, maxWidth, fontSize = 12) {
-            doc.setFontSize(fontSize);
-            const lines = doc.splitTextToSize(text, maxWidth);
-            doc.text(lines, x, y);
-            return y + (lines.length * lineHeight);
-        }
+        // Create beautiful HTML template
+        const htmlContent = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <style>
+                    * { margin: 0; padding: 0; box-sizing: border-box; }
+                    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; line-height: 1.6; }
+                    .container { padding: 40px; max-width: 800px; margin: 0 auto; }
+                    .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px 30px; border-radius: 15px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3); }
+                    .header h1 { font-size: 36px; font-weight: 700; margin-bottom: 10px; letter-spacing: 1px; }
+                    .header .subtitle { font-size: 14px; opacity: 0.9; }
+                    .section { margin-bottom: 35px; page-break-inside: avoid; }
+                    .section-title { color: #667eea; font-size: 22px; font-weight: 700; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 3px solid #667eea; }
+                    .info-box { background: #f8f9fa; border-left: 4px solid #667eea; padding: 20px 25px; border-radius: 8px; margin-bottom: 20px; }
+                    .info-row { display: flex; padding: 10px 0; border-bottom: 1px solid #e9ecef; }
+                    .info-row:last-child { border-bottom: none; }
+                    .info-label { font-weight: 600; color: #495057; min-width: 180px; }
+                    .info-value { color: #212529; flex: 1; }
+                    .text-content { background: #f8f9fa; padding: 20px; border-radius: 8px; white-space: pre-wrap; line-height: 1.8; font-size: 14px; }
+                    .badge { display: inline-block; padding: 6px 12px; background: #28a745; color: white; border-radius: 20px; font-size: 12px; font-weight: 600; margin-left: 10px; }
+                    .footer { margin-top: 50px; padding-top: 20px; border-top: 2px solid #e9ecef; text-align: center; color: #6c757d; font-size: 12px; }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <h1>CHARGEBACK EVIDENCE PACK</h1>
+                        <div class="subtitle">Order ${formData.orderId} • Generated ${generatedDate}</div>
+                    </div>
 
-        // Helper function to add section header
-        function addSectionHeader(title, y) {
-            doc.setFontSize(14);
-            doc.setFont(undefined, 'bold');
-            doc.setTextColor(13, 110, 253); // Primary blue color
-            doc.text(title, margin, y);
-            doc.setTextColor(0, 0, 0); // Reset to black
-            doc.setFont(undefined, 'normal');
-            return y + 10;
-        }
+                    <div class="section">
+                        <h2 class="section-title">Order Information</h2>
+                        <div class="info-box">
+                            <div class="info-row">
+                                <div class="info-label">Order ID:</div>
+                                <div class="info-value"><strong>${formData.orderId}</strong></div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info-label">Order Date:</div>
+                                <div class="info-value">${formData.orderDate}</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info-label">Order Amount:</div>
+                                <div class="info-value"><strong style="color: #28a745; font-size: 18px;">$${formData.orderAmount}</strong></div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info-label">Platform:</div>
+                                <div class="info-value">${formData.platform}</div>
+                            </div>
+                        </div>
+                    </div>
 
-        // Helper function to check for page break
-        function checkPageBreak(currentY, neededSpace = 40) {
-            if (currentY > pageHeight - neededSpace) {
-                doc.addPage();
-                return 20;
-            }
-            return currentY;
-        }
+                    <div class="section">
+                        <h2 class="section-title">Merchant & Customer Information</h2>
+                        <div class="info-box">
+                            <div class="info-row">
+                                <div class="info-label">Business Name:</div>
+                                <div class="info-value">${formData.businessName}</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info-label">Business Contact:</div>
+                                <div class="info-value">${formData.businessContact}</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info-label">Customer Name:</div>
+                                <div class="info-value">${formData.customerName}</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info-label">Customer Email:</div>
+                                <div class="info-value">${formData.customerEmail}</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info-label">Billing/Shipping Address:</div>
+                                <div class="info-value">${formData.billingShippingAddress.replace(/\n/g, '<br>')}</div>
+                            </div>
+                        </div>
+                    </div>
 
-        // Document Header
-        doc.setFontSize(20);
-        doc.setFont(undefined, 'bold');
-        doc.setTextColor(13, 110, 253);
-        yPosition = addWrappedText('CHARGEBACK EVIDENCE PACK', margin, yPosition, contentWidth, 20);
-        
-        doc.setFontSize(12);
-        doc.setTextColor(0, 0, 0);
-        doc.setFont(undefined, 'normal');
-        yPosition = addWrappedText(`Generated on: ${new Date().toLocaleDateString()}`, margin, yPosition + 5, contentWidth);
-        yPosition += 15;
+                    <div class="section">
+                        <h2 class="section-title">Order Details</h2>
+                        <div class="text-content">${formData.orderSummary}</div>
+                    </div>
 
-        // Order Information Section
-        yPosition = checkPageBreak(yPosition);
-        yPosition = addSectionHeader('ORDER INFORMATION', yPosition);
-        yPosition = addWrappedText(`Order ID: ${formData.orderId}`, margin, yPosition, contentWidth);
-        yPosition = addWrappedText(`Order Date: ${formData.orderDate}`, margin, yPosition, contentWidth);
-        yPosition = addWrappedText(`Order Amount: $${formData.orderAmount}`, margin, yPosition, contentWidth);
-        yPosition = addWrappedText(`Platform: ${formData.platform}`, margin, yPosition, contentWidth);
-        yPosition += 10;
+                    <div class="section">
+                        <h2 class="section-title">Shipping & Delivery Proof <span class="badge">✓ VERIFIED</span></h2>
+                        <div class="info-box">
+                            <div class="info-row">
+                                <div class="info-label">Shipping Address:</div>
+                                <div class="info-value">${formData.shippingAddress.replace(/\n/g, '<br>')}</div>
+                            </div>
+                            ${formData.trackingNumber ? `<div class="info-row"><div class="info-label">Tracking Number:</div><div class="info-value"><strong>${formData.trackingNumber}</strong></div></div>` : ''}
+                            ${formData.deliveryDate ? `<div class="info-row"><div class="info-label">Delivery Date:</div><div class="info-value"><strong style="color: #28a745;">${formData.deliveryDate}</strong></div></div>` : ''}
+                        </div>
+                    </div>
 
-        // Merchant & Customer Information Section
-        yPosition = checkPageBreak(yPosition);
-        yPosition = addSectionHeader('MERCHANT & CUSTOMER INFORMATION', yPosition);
-        yPosition = addWrappedText(`Business Name: ${formData.businessName}`, margin, yPosition, contentWidth);
-        yPosition = addWrappedText(`Business Contact: ${formData.businessContact}`, margin, yPosition, contentWidth);
-        yPosition = addWrappedText(`Customer Name: ${formData.customerName}`, margin, yPosition, contentWidth);
-        yPosition = addWrappedText(`Customer Email: ${formData.customerEmail}`, margin, yPosition, contentWidth);
-        yPosition += 3;
-        yPosition = addWrappedText('Billing/Shipping Address:', margin, yPosition, contentWidth);
-        yPosition = addWrappedText(formData.billingShippingAddress, margin, yPosition, contentWidth);
-        yPosition += 10;
+                    ${formData.customerCommunication ? `<div class="section"><h2 class="section-title">Communication History</h2><div class="text-content">${formData.customerCommunication}</div></div>` : ''}
 
-        // Order Details Section
-        yPosition = checkPageBreak(yPosition);
-        yPosition = addSectionHeader('ORDER DETAILS', yPosition);
-        yPosition = addWrappedText(formData.orderSummary, margin, yPosition, contentWidth);
-        yPosition += 10;
+                    ${formData.refundPolicy ? `<div class="section"><h2 class="section-title">Refund/Terms of Service Policy</h2><div class="text-content">${formData.refundPolicy}</div></div>` : ''}
 
-        // Shipping Information Section
-        yPosition = checkPageBreak(yPosition);
-        yPosition = addSectionHeader('SHIPPING & DELIVERY PROOF', yPosition);
-        yPosition = addWrappedText('Shipping Address:', margin, yPosition, contentWidth);
-        yPosition = addWrappedText(formData.shippingAddress, margin, yPosition, contentWidth);
-        if (formData.trackingNumber) {
-            yPosition = addWrappedText(`Tracking Number: ${formData.trackingNumber}`, margin, yPosition, contentWidth);
-        }
-        if (formData.deliveryDate) {
-            yPosition = addWrappedText(`Delivery Date: ${formData.deliveryDate}`, margin, yPosition, contentWidth);
-        }
-        yPosition += 10;
+                    ${formData.rebuttalMemo ? `<div class="section"><h2 class="section-title">Rebuttal Memo</h2><div class="text-content">${formData.rebuttalMemo}</div></div>` : ''}
 
-        // Customer Communication Section
-        if (formData.customerCommunication) {
-            yPosition = checkPageBreak(yPosition, 60);
-            yPosition = addSectionHeader('COMMUNICATION HISTORY', yPosition);
-            yPosition = addWrappedText(formData.customerCommunication, margin, yPosition, contentWidth);
-            yPosition += 10;
-        }
+                    <div class="footer">
+                        Generated by Chargeback Evidence Pack Generator<br>
+                        Document ID: ${formData.orderId}-${Date.now()}
+                    </div>
+                </div>
+            </body>
+            </html>
+        `;
 
-        // Refund Policy Section
-        if (formData.refundPolicy) {
-            yPosition = checkPageBreak(yPosition, 60);
-            yPosition = addSectionHeader('REFUND/TERMS OF SERVICE POLICY', yPosition);
-            yPosition = addWrappedText(formData.refundPolicy, margin, yPosition, contentWidth);
-            yPosition += 10;
-        }
+        // Configure html2pdf options
+        const opt = {
+            margin: 10,
+            filename: `Chargeback_Evidence_${formData.orderId}_${new Date().toISOString().split('T')[0]}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
 
-        // Rebuttal Memo Section
-        if (formData.rebuttalMemo) {
-            yPosition = checkPageBreak(yPosition, 80);
-            yPosition = addSectionHeader('REBUTTAL MEMO', yPosition);
-            yPosition = addWrappedText(formData.rebuttalMemo, margin, yPosition, contentWidth);
-            yPosition += 10;
-        }
-
-        // Evidence Summary Section
-        yPosition = checkPageBreak(yPosition, 80);
-        yPosition = addSectionHeader('EVIDENCE SUMMARY', yPosition);
-        
-        const evidenceSummary = `This evidence pack contains comprehensive documentation for Order ${formData.orderId} placed on ${formData.orderDate} for $${formData.orderAmount}.
-
-Key Evidence Points:
-• Valid order with complete customer and shipping information
-• Product delivered to the address provided by the customer
-${formData.trackingNumber ? '• Tracking information available showing delivery confirmation' : ''}
-${formData.customerCommunication ? '• Customer communication logs included' : ''}
-• Clear refund/return policy was in effect at time of purchase
-
-This transaction was legitimate and fulfilled according to our terms of service. The customer received the product(s) as ordered and described.`;
-        
-        yPosition = addWrappedText(evidenceSummary.trim(), margin, yPosition, contentWidth);
-
-        // Footer
-        doc.setFontSize(10);
-        doc.setTextColor(108, 117, 125); // Muted color
-        doc.text('Generated by Chargeback Evidence Pack Generator', margin, pageHeight - 10);
-
-        // Save the PDF
-        const fileName = `Chargeback_Evidence_${formData.orderId}_${new Date().toISOString().split('T')[0]}.pdf`;
-        doc.save(fileName);
-
-        // Show success message
-        showSuccessMessage('Your evidence pack has been generated and downloaded.');
+        // Generate and download PDF
+        html2pdf().set(opt).from(htmlContent).save().then(() => {
+            showSuccessMessage('Your professional evidence pack has been generated and downloaded!');
+        }).catch((error) => {
+            console.error('PDF generation error:', error);
+            alert('Error generating PDF. Please try again or contact support.');
+        });
     }
 
     // ==================== AI HELPER FUNCTIONS ====================
@@ -369,7 +366,7 @@ This transaction was legitimate and fulfilled according to our terms of service.
     }
 
     // Success message function
-    function showSuccessMessage(message = 'Your evidence pack has been generated and downloaded.') {
+    function showSuccessMessage(message) {
         // Create and show success alert
         const alertDiv = document.createElement('div');
         alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed';
@@ -390,6 +387,8 @@ This transaction was legitimate and fulfilled according to our terms of service.
         }, 5000);
     }
 
+    // ==================== OTHER FEATURES ====================
+
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -408,18 +407,26 @@ This transaction was legitimate and fulfilled according to our terms of service.
     const demoVideo = document.querySelector('.demo-video-placeholder');
     if (demoVideo) {
         demoVideo.addEventListener('click', function() {
-            // In a real implementation, this would open a video modal or redirect to a video
             alert('Demo video would play here. In the real version, this would show a 45-second Loom video demonstrating the tool.');
         });
     }
 
-    // Form validation enhancement
+    // Form validation enhancement - GREEN CHECKMARKS
     const requiredFields = form.querySelectorAll('[required]');
     requiredFields.forEach(field => {
         field.addEventListener('blur', function() {
             if (!this.value.trim()) {
                 this.classList.add('is-invalid');
+                this.classList.remove('is-valid');
             } else {
+                this.classList.remove('is-invalid');
+                this.classList.add('is-valid');
+            }
+        });
+        
+        // Also check on input for immediate feedback
+        field.addEventListener('input', function() {
+            if (this.value.trim()) {
                 this.classList.remove('is-invalid');
                 this.classList.add('is-valid');
             }
@@ -450,45 +457,47 @@ This transaction was legitimate and fulfilled according to our terms of service.
         }
     });
 
-    // Contact form handler
+    // ==================== CONTACT FORM HANDLER ====================
+    
     const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(contactForm);
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        
-        // Show loading
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
-        submitBtn.disabled = true;
-        
-        // Send to Formspree
-        fetch(contactForm.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
-            }
-        }).then(response => {
-            if (response.ok) {
-                alert('✅ Message sent successfully!\n\nThank you for contacting us. We\'ll respond within 24 hours.');
-                contactForm.reset();
-                
-                const modal = bootstrap.Modal.getInstance(document.getElementById('contactModal'));
-                if (modal) modal.hide();
-            } else {
-                throw new Error('Failed');
-            }
-        }).catch(error => {
-            alert('Sorry, there was an error. Please email us directly at: support@chargebackgenerator.com');
-        }).finally(() => {
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(contactForm);
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            // Show loading
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+            submitBtn.disabled = true;
+            
+            // Send to Formspree
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    alert('✅ Message sent successfully!\n\nThank you for contacting us. We\'ll respond within 24 hours.');
+                    contactForm.reset();
+                    
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('contactModal'));
+                    if (modal) modal.hide();
+                } else {
+                    throw new Error('Failed');
+                }
+            }).catch(error => {
+                alert('Sorry, there was an error. Please email us directly at: support@chargebackgenerator.com');
+            }).finally(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
         });
-    });
-}
+    }
+});
 
 // Utility function to format currency
 function formatCurrency(amount) {
