@@ -411,11 +411,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Form validation enhancement - GREEN CHECKMARKS
+    // Form validation enhancement - GREEN CHECKMARKS (PROPER VALIDATION)
     const requiredFields = form.querySelectorAll('[required]');
     requiredFields.forEach(field => {
         field.addEventListener('blur', function() {
-            if (!this.value.trim()) {
+            const isValid = validateField(this);
+            if (!isValid) {
                 this.classList.add('is-invalid');
                 this.classList.remove('is-valid');
             } else {
@@ -424,14 +425,58 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Also check on input for immediate feedback
+        // Also check on input, but only after they've filled it properly
         field.addEventListener('input', function() {
-            if (this.value.trim()) {
-                this.classList.remove('is-invalid');
-                this.classList.add('is-valid');
+            // Only validate if field has been touched (has valid or invalid class)
+            if (this.classList.contains('is-valid') || this.classList.contains('is-invalid')) {
+                const isValid = validateField(this);
+                if (!isValid) {
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                } else {
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                }
             }
         });
     });
+
+    // Proper field validation function
+    function validateField(field) {
+        const value = field.value.trim();
+        
+        // Must have value
+        if (!value) return false;
+        
+        // Email validation
+        if (field.type === 'email') {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(value);
+        }
+        
+        // Number validation
+        if (field.type === 'number') {
+            const num = parseFloat(value);
+            return !isNaN(num) && num > 0;
+        }
+        
+        // Date validation
+        if (field.type === 'date') {
+            return value.length === 10; // YYYY-MM-DD format
+        }
+        
+        // Text/textarea - must be at least 2 characters
+        if (field.tagName === 'TEXTAREA' || field.type === 'text') {
+            return value.length >= 2;
+        }
+        
+        // Select - must have a value selected
+        if (field.tagName === 'SELECT') {
+            return value !== '';
+        }
+        
+        return true;
+    }
 
     // Auto-format order amount
     document.getElementById('orderAmount').addEventListener('input', function() {
